@@ -7,6 +7,7 @@ import org.boardly.model.User;
 import org.boardly.request.AuthRequest;
 import org.boardly.request.ForgotPasswordRequest;
 import org.boardly.request.RegisterRequest;
+import org.boardly.request.ResetPasswordRequest;
 import org.boardly.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -76,9 +77,9 @@ public class AuthController {
 	    
 	    //reset password 
 	    @PostMapping("/resetPassword")
-	    public ResponseEntity<String> resetPassword(@RequestBody Map<String, String> request) {
-	        String token = request.get("token");
-	        String newPassword = request.get("newPassword");
+	    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) {
+	        String token = request.getToken();
+	        String newPassword = request.getNewPassword();
 
 	        if (token == null || newPassword == null) {
 	            return ResponseEntity.badRequest().body("Token and new password are required");
